@@ -34,7 +34,16 @@ public class ScreenAdaptation {
             });
         }
 
-        final float targetDensity = appDisplayMetrics.widthPixels / 360f;
+        float targetDensity = 0;
+        int orientation = activity.getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // 竖屏
+            targetDensity = appDisplayMetrics.widthPixels / 360f;
+        } else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            // 横屏
+            targetDensity = appDisplayMetrics.heightPixels / 360f;
+        }
+
         final float targetScaledDensity = targetDensity * (sNoncompatScaledDensity / sNoncompatDensity);
         final int targetDensityDpi = (int) (160 * targetDensity);
 
